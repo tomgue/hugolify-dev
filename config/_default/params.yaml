@@ -6,6 +6,9 @@ umami:
   website_id: ''
   src: 'https://cloud.umami.is/script.js'
 
+form:
+  netlify: true
+
 # logo:
 #   header: '/assets/images/logo.svg'
 #   footer: '/assets/images/logo-footer.svg' # default: /assets/images/logo.svg
@@ -27,13 +30,14 @@ search:
 admin:
   cms: sveltiacms
   name: github
-  repo: tomgue/tomgue.github.io
+  repo: tomgue/tom-www
+  branch: dev
   title: TomLab CMS
-  media_folder: images/uploads
-  public_folder: images/uploads
   netlify:
-    identity: false
+    identity: true
   collections:
+    indexes:
+      enable: false
     pages:
       thumbnail: hero.images.src
       media_folder: '{{media_folder}}/pages'
@@ -47,5 +51,3 @@ admin:
       nested:
         depth: 10
         subfolders: true
-    indexes:
-      enable: false
