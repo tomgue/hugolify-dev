@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "budparr.language-hugo-vscode",
+    "yzhang.markdown-all-in-one",
+    "esbenp.prettier-vscode",
+    "redhat.vscode-yaml",
+    "editorconfig.editorconfig",
+    "tamasfe.even-better-toml",
+    "thuliteio.hugo-shortcodes"
+  ]
+}

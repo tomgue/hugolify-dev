@@ -1,0 +1,45 @@
+name: Hugo Build & Deploy Check
+
+on:
+  push:
+    branches: [ "dev", "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24.21"
+          cache: 'yarn'
+          cache-dependency-path: '**/yarn.lock'
+
+      - name: Install Node.js dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.167.0"
+          extended: true
+
+      - name: Install Hugo modules
+        run: yarn install:hugolify
+
+      - name: Build with Pagefind
+        env:
+          HUGO_ENVIRONMENT: production
+        run: yarn build:search
+
+      - name: Verify public folder
+        run: |
+          if [ ! -d "public" ]; then
+            echo "Build failed: public folder not generated"
+            exit 1
+          fi
